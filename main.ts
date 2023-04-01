@@ -1,15 +1,13 @@
 let distance = 0
-servos.P0.setAngle(180)
+cuteBot.setServo(cuteBot.ServoList.S1, 90)
 basic.forever(function () {
-    distance = sonar.ping(
-    DigitalPin.P8,
-    DigitalPin.P12,
-    PingUnit.MicroSeconds
-    )
+    distance = cuteBot.ultrasonic(cuteBot.SonarUnit.Centimeters)
     basic.showString("" + (distance))
-    if (distance < 30) {
-    	
+    if (distance < 40) {
+        cuteBot.colorLight(cuteBot.RGBLights.ALL, 0xffff00)
+        cuteBot.setServo(cuteBot.ServoList.S1, 90)
     } else {
-    	
+        cuteBot.setServo(cuteBot.ServoList.S1, 180)
+        cuteBot.closeheadlights()
     }
 })
